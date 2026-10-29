@@ -1,46 +1,80 @@
 import 'package:flutter/material.dart';
 
-
 void main() {
-  runApp(const MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: MyApp(),
-  ));
+  runApp(MainApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MainApp extends StatelessWidget {
+   MainApp({super.key});
+  
+  final String userName = 'Alfan Fadillah Ramadhan';
+  final String role = 'Student of GLobal Institute';
+
+  final List<String> experiences = [
+    'Touring Jakarta - Bandung', 
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Aplikasi Mahasiswa',
+      title: 'Aplikasi Profil',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
       ),
-      home: MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          const Text('Katalog Kampus'),
-          Row(
-            children: const [
-            Icon(Icons.school),
-            Text('Fakultas Teknik Informatika'),
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Profil Pengguna'),
+          centerTitle: true,
+          backgroundColor: Colors.blueAccent,
+          foregroundColor: Colors.white,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+         
+              const CircleAvatar(
+                radius: 50,
+                backgroundColor: Colors.grey,
+                child: Icon(Icons.person, size: 50, color: Colors.white),
+              ),
+              
+            
+              const SizedBox(width: 16),
+              
+              Column(
+                children: [
+                  Text(
+                    userName,
+                    style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    role,
+                    style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 24),
+              
+              ElevatedButton.icon(
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Fitur edit belum aktif pada modul statis.'))
+                   );
+                },
+                icon: const Icon(Icons.edit),
+                label: const Text('Edit Profil'),
+              ),
+              const SizedBox(height: 24),
+              
             ]
-          ),
-        ]
-      ),
-    );
+          )
+        )
+      )
+     );
   }
 }
